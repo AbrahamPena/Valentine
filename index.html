@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Say Yes!</title>
+        <style>
+            button {
+                font-size: 18px;
+                padding: 10px;
+                margin: 5px;
+                transition: all 0.3s ease;  
+            }
+            #button1 {
+                background-color: green;
+            }
+            #button2 {
+                background-color: red;
+            }
+            #HeaderFont {
+                font-family: Helvetica;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="hdrMsg" class="#HeaderFont">Will You Be My Valentine?</h1>
+        <h1 id="NoClickMessage"></h1>
+
+        <button id="button1" onclick="resizeButtons('button1')">Yes!</button>
+        <button id="button2" onclick="resizeButtons('button2')">NO</button>
+
+        <img id="CatKiss" style="display: none;" src="catkiss.gif">
+      
+        <span id="msg"></span>
+
+        <script>
+            let NoClickCount = 0;
+            let NoClickMax = 7;
+            const SpanMsg = document.getElementById("msg");
+            const SpanNoClick = document.getElementById("NoClickMessage");
+            const CatGif = document.getElementById("CatKiss");
+            const HdrMsg = document.getElementById("hdrMsg");
+          function resizeButtons(clickedButtonId) {
+            let button1 = document.getElementById('button1');
+            let button2 = document.getElementById('button2');
+            
+            let currentSize1 = parseInt(window.getComputedStyle(button1).fontSize);
+            let currentSize2 = parseInt(window.getComputedStyle(button2).fontSize);
+            
+            if (clickedButtonId === 'button1') {
+              // Grow button1 and shrink button2
+            //   button1.style.fontSize = (currentSize1 + 2) + 'px';
+            //   button1.style.padding = (currentSize1 + 6) + 'px ' + (currentSize1 + 12) + 'px';
+              
+            //   button2.style.fontSize = (currentSize2 - 2) + 'px';
+            //   button2.style.padding = (currentSize2 - 6) + 'px ' + (currentSize2 - 12) + 'px';
+                SpanMsg.style.display = "none";
+                SpanNoClick.style.display = "none";
+                HdrMsg.style.display = "none";
+                button1.style.display = "none";
+                button2.style.display = "none";
+                CatGif.style.display = "block";
+
+            //   document.body.innerHTML = "";
+            } else {
+              // Grow button2 and shrink button1
+              button2.style.fontSize = (currentSize2 + 2) + 'px';
+              button2.style.padding = (currentSize2 + 6) + 'px ' + (currentSize2 + 12) + 'px';
+              
+              button1.style.fontSize = (currentSize1 - 2) + 'px';
+              button1.style.padding = (currentSize1 - 6) + 'px ' + (currentSize1 - 12) + 'px';
+              NoClickCount++;
+                SpanMsg.textContent = "Click No " + (NoClickMax - NoClickCount) + " more times!"
+
+                if ((NoClickMax - NoClickCount) < 0) {
+                    document.body.innerHTML = "Well fuck you then!";
+                }
+            }
+          }
+        </script>
+    </body>
+</html>
